@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" data-stage="awareness">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Used Car Inspection Guide</title>
+  <meta name="description" content="How to check a used car before you buy: 12 things to look at, with a printable checklist.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-head">
+    <div class="wrap">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Indigo Lane Motors</a>
+      <nav class="nav" aria-label="Main">
+        <a href="inventory.html">Inventory</a>
+        <a href="guide.html" aria-current="page">Buying guide</a>
+        <a href="test-drive.html#tradein">Trade-in</a>
+        <a href="test-drive.html#prequal">Financing</a>
+        <a class="btn btn-amber" href="test-drive.html" data-track="nav_test_drive">Book a test drive</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article">
+    <p class="meta">Buying guide, 8-minute read</p>
+    <h1>How to check a used car before you buy: 12 things to look at</h1>
+    <p>A used car can be a great buy or an expensive mistake, and the difference usually shows up in the first 30 minutes of looking. Use these checks at any dealer or private sale. Tick them off as you go; your progress stays on this device.</p>
+
+    <h2>Outside the car</h2>
+    <p>Walk around the car in daylight before anyone talks you through it. Look along each side at an angle: ripples, uneven gaps between panels and paint that doesn't quite match are signs of past bodywork.</p>
+
+    <h2>Under the hood and inside</h2>
+    <p>Ask the seller not to start the car before you arrive. A cold start tells you more than a warm one: listen for knocking or rattling and watch the exhaust for smoke.</p>
+
+    <div class="inline-cta">
+      <p>Want cars that already passed these checks? Every car on our lot is inspected before it's listed.</p>
+      <a class="btn btn-violet" href="inventory.html" data-track="guide_mid_inventory">Browse inspected cars</a>
+    </div>
+
+    <h2>On the test drive</h2>
+    <p>Drive at both city and highway speeds if you can. The car should track straight with your hands light on the wheel, shift smoothly and stop without pulling, grinding or a soft pedal.</p>
+
+    <h2>The paperwork</h2>
+    <p>Make sure the VIN on the dashboard and driver's door jamb matches the title and the history report. You can check any VIN for open safety recalls at <a href="https://www.nhtsa.gov/recalls" rel="noopener">nhtsa.gov/recalls</a>.</p>
+
+    <h2 id="checklist">The checklist</h2>
+    <p class="progress-note" id="progress" aria-live="polite">0 of 12 checked</p>
+    <ul class="checklist" id="checks">
+      <li><label><input type="checkbox" data-check="1"><div><strong>Panel gaps and paint</strong><span>Even gaps, matching paint, no ripples.</span></div></label></li>
+      <li><label><input type="checkbox" data-check="2"><div><strong>Tires</strong><span>Even wear across the tread. Penny test: if you can see the top of Lincoln's head, the tread is worn.</span></div></label></li>
+      <li><label><input type="checkbox" data-check="3"><div><strong>Rust</strong><span>Wheel arches, rocker panels, door bottoms and underneath.</span></div></label></li>
+      <li><label><input type="checkbox" data-check="4"><div><strong>Lights and glass</strong><span>Every light works; no chips or cracks in the windshield.</span></div></label></li>
+      <li><label><input type="checkbox" data-check="5"><div><strong>Cold start</strong><span>No knocking, rattling or smoke from the exhaust.</span></div></label></li>
+      <li><label><input type="checkbox" data-check="6"><div><strong>Fluids and leaks</strong><span>Oil at the right level; no fresh drips under the car.</span></div></label></li>
+      <li><label><input type="checkbox" data-check="7"><div><strong>Warning lights</strong><span>Dashboard lights come on with the key, then go off once running.</span></div></label></li>
+      <li><label><input type="checkbox" data-check="8"><div><strong>Interior and electronics</strong><span>A/C, heat, windows, locks and screen all work; no musty smell.</span></div></label></li>
+      <li><label><input type="checkbox" data-check="9"><div><strong>City and highway driving</strong><span>Tracks straight, shifts smoothly, no vibration.</span></div></label></li>
+      <li><label><input type="checkbox" data-check="10"><div><strong>Brakes</strong><span>Firm pedal, no pulling or grinding.</span></div></label></li>
+      <li><label><input type="checkbox" data-check="11"><div><strong>VIN, history and recalls</strong><span>VIN matches the title; history report reviewed; open recalls checked.</span></div></label></li>
+      <li><label><input type="checkbox" data-check="12"><div><strong>Records and an independent inspection</strong><span>Service records seen; a mechanic you choose has looked it over.</span></div></label></li>
+    </ul>
+
+    <div class="inline-cta">
+      <p>Seen a car you like? Book a test drive and bring this checklist.</p>
+      <a class="btn btn-amber" href="test-drive.html" data-track="guide_end_test_drive">Book a test drive</a>
+    </div>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <p><strong>Indigo Lane Motors</strong> Open Mon–Fri 10am–6pm, Sat 10am–3pm ET. Closed Sunday.</p>
+      <p class="demo-note"><strong>Demo funnel.</strong> Indigo Lane Motors is a fictional dealership. Cars, prices and policies are invented. Built by Julian Bjorn Gatchalian as a portfolio sample.</p>
+    </div>
+  </footer>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/funnel.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var F = window.Funnel;
+    var saved = F.load("checklist") || {};
+    var boxes = document.querySelectorAll("#checks input");
+    var progress = document.getElementById("progress");
+    function update() {
+      var n = 0;
+      boxes.forEach(function (b) { if (b.checked) n++; });
+      progress.textContent = n + " of " + boxes.length + " checked" + (n === boxes.length ? ". Nice work." : "");
+    }
+    boxes.forEach(function (b) {
+      b.checked = !!saved[b.dataset.check];
+      b.addEventListener("change", function () {
+        saved[b.dataset.check] = b.checked;
+        F.save("checklist", saved);
+        update();
+      });
+    });
+    update();
+  })();
+  </script>
+</body>
+</html>

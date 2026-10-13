@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en" data-stage="interest">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Indigo Lane Vehicle Details</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-head">
+    <div class="wrap">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Indigo Lane Motors</a>
+      <nav class="nav" aria-label="Main">
+        <a href="inventory.html">Inventory</a>
+        <a href="guide.html">Buying guide</a>
+        <a href="test-drive.html#tradein">Trade-in</a>
+        <a href="test-drive.html#prequal">Financing</a>
+        <a class="btn btn-amber" href="test-drive.html" data-track="nav_test_drive">Book a test drive</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div id="missing" class="page" hidden>
+      <div class="wrap">
+        <h1>We couldn't find that car</h1>
+        <p class="lede">It may have sold, or the link is incomplete. Browse what's on the lot now.</p>
+        <a class="btn btn-violet" href="inventory.html">Browse inventory</a>
+      </div>
+    </div>
+
+    <div id="detail" hidden>
+      <section class="car-hero on-night">
+        <div class="wrap">
+          <p class="crumbs"><a href="inventory.html">Inventory</a> / <span id="crumb-name"></span></p>
+          <div class="car-title">
+            <div>
+              <h1 id="car-name"></h1>
+              <p id="car-sub"></p>
+              <div class="car-ctas">
+                <a class="btn btn-amber" id="hero-drive" href="test-drive.html" data-track="car_hero_test_drive">Book a test drive</a>
+                <a class="btn btn-line-light" id="hero-reserve" href="reserve.html" data-track="car_hero_reserve">Reserve this car</a>
+              </div>
+            </div>
+            <div class="price">
+              <strong id="car-price"></strong>
+              <p id="car-price-note">No dealer fees. Tax and registration extra.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap car-grid">
+          <div>
+            <h2 class="title" style="font-size:1.6rem;margin-bottom:12px;">Specs</h2>
+            <table class="spec-table" id="specs"></table>
+
+            <h2 class="title" style="font-size:1.6rem;margin:36px 0 12px;">History highlights</h2>
+            <ul class="history-list" id="history"></ul>
+            <p class="hint" style="margin-top:12px;">Ask us for the full vehicle history report and inspection sheet.</p>
+
+            <div class="panel" style="margin-top:32px;">
+              <h3>Can't come in yet? Get a live video walkaround</h3>
+              <p class="hint" style="margin:0 0 14px;">A salesperson calls you on video and shows you the car up close, engine running. About 15 minutes.</p>
+              <form id="walk-form" novalidate>
+                <div class="row2">
+                  <div class="field"><label for="w-first">First name</label><input id="w-first" name="firstName" autocomplete="given-name" maxlength="60"></div>
+                  <div class="field"><label for="w-phone">Mobile number</label><input id="w-phone" name="phone" type="tel" autocomplete="tel" maxlength="25" placeholder="(555) 123-4567"></div>
+                </div>
+                <div class="field"><label for="w-email">Email</label><input id="w-email" name="email" type="email" autocomplete="email" maxlength="120"></div>
+                <label class="consent"><input type="checkbox" id="w-consent" name="consent"><span>I agree to be contacted by phone, text and email about this car. Message and data rates may apply. Reply STOP to opt out.</span></label>
+                <p class="form-error" id="w-error" role="alert"></p>
+                <button class="btn btn-violet" type="submit">Request a video walkaround</button>
+              </form>
+              <div class="success" id="walk-done" hidden><h3>Request received</h3><p>We'll call you within one business hour to set up the video call.</p></div>
+            </div>
+          </div>
+
+          <aside>
+            <div class="panel calc">
+              <h2>Estimate your payment</h2>
+              <div class="row2">
+                <div class="field"><label for="c-down">Down payment ($)</label><input id="c-down" type="number" min="0" step="100" inputmode="numeric"></div>
+                <div class="field"><label for="c-apr">APR (%)</label><input id="c-apr" type="number" min="0" max="30" step="0.1" inputmode="decimal"></div>
+              </div>
+              <div class="field"><label for="c-term">Term</label>
+                <select id="c-term"><option value="36">36 months</option><option value="48">48 months</option><option value="60" selected>60 months</option><option value="72">72 months</option></select>
+              </div>
+              <div class="calc-out" aria-live="polite"><strong id="c-out"></strong><span>/month</span></div>
+              <p class="calc-math" id="c-math"></p>
+              <p class="hint" style="margin:6px 0 0;">Estimate only, before tax and registration. Your actual rate depends on your credit and lender.</p>
+
+              <div class="cta-stack">
+                <a class="btn btn-amber" id="cta-drive" href="test-drive.html" data-track="car_test_drive">Book a test drive</a>
+                <a class="btn btn-violet" id="cta-reserve" href="reserve.html" data-track="car_reserve">Reserve this car</a>
+                <a class="btn btn-line" href="test-drive.html#prequal" data-track="car_prequal">Get pre-qualified</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <p><strong>Indigo Lane Motors</strong> Open Mon–Fri 10am–6pm, Sat 10am–3pm ET. Closed Sunday.</p>
+      <p class="demo-note"><strong>Demo funnel.</strong> Indigo Lane Motors is a fictional dealership. Cars, prices and policies are invented. Built by Julian Bjorn Gatchalian as a portfolio sample.</p>
+    </div>
+  </footer>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/funnel.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var F = window.Funnel;
+    var id = (location.hash || "").replace("#", "");
+    var car = F.getCar(id);
+    if (!car) { document.getElementById("missing").hidden = false; return; }
+
+    F.save("lastCar", car.id);
+    document.title = F.carName(car) + " " + car.trim + " | Indigo Lane Motors";
+    document.getElementById("detail").hidden = false;
+    document.getElementById("crumb-name").textContent = F.carName(car);
+    document.getElementById("car-name").textContent = F.carName(car);
+    document.getElementById("car-sub").textContent = car.trim + ", " + car.color + ", " + F.miles(car.miles);
+    document.getElementById("car-price").textContent = F.money(car.price);
+
+    var specs = [
+      ["Year", car.year], ["Make", car.make], ["Model", car.model], ["Trim", car.trim],
+      ["Body", car.body], ["Mileage", F.miles(car.miles)], ["Drivetrain", car.drive],
+      ["Fuel", car.fuel], ["Transmission", car.trans], ["Exterior color", car.color], ["Stock number", car.id.toUpperCase()]
+    ];
+    document.getElementById("specs").innerHTML = specs.map(function (s) {
+      return "<tr><th scope=\"row\">" + s[0] + "</th><td>" + F.esc(s[1]) + "</td></tr>";
+    }).join("");
+
+    var hist = [
+      [car.owners === 1 ? "One previous owner" : car.owners + " previous owners", false],
+      [car.accidents === 0 ? "No accidents reported" : car.accidents + " accident reported, repaired before listing", car.accidents > 0],
+      [car.records ? "Service records available" : "No service records on file", !car.records],
+      ["Passed our pre-sale inspection", false]
+    ];
+    document.getElementById("history").innerHTML = hist.map(function (h) {
+      return "<li" + (h[1] ? " class=\"warn\"" : "") + "><span>" + h[0] + "</span></li>";
+    }).join("");
+
+    document.getElementById("cta-drive").href = "test-drive.html#" + car.id;
+    document.getElementById("cta-reserve").href = "reserve.html#" + car.id;
+    document.getElementById("hero-drive").href = "test-drive.html#" + car.id;
+    document.getElementById("hero-reserve").href = "reserve.html#" + car.id;
+
+    // ---- payment calculator ----
+    var down = document.getElementById("c-down"), apr = document.getElementById("c-apr"), term = document.getElementById("c-term");
+    down.value = Math.round(car.price * F.DEFAULT_DOWN);
+    apr.value = F.DEFAULT_APR;
+    function calc() {
+      var d = Math.min(Math.max(+down.value || 0, 0), car.price);
+      var a = Math.min(Math.max(+apr.value || 0, 0), 30);
+      var n = +term.value;
+      var m = F.monthlyPayment(car.price, d, a, n);
+      document.getElementById("c-out").textContent = F.money(m);
+      document.getElementById("c-math").textContent =
+        "Financing " + F.money(car.price - d) + " for " + n + " months at " + a + "% APR. Total paid: " + F.money(m * n + d) + ".";
+    }
+    [down, apr, term].forEach(function (el) { el.addEventListener("input", calc); el.addEventListener("change", calc); });
+    calc();
+
+    // ---- video walkaround request (intent signal) ----
+    var form = document.getElementById("walk-form");
+    F.prefill(form);
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var missing = F.checkForm(form, { firstName: "text", phone: "phone", email: "email", consent: "check" },
+        { firstName: "your first name", phone: "a 10-digit mobile number", email: "a valid email", consent: "your OK to contact you" });
+      var err = document.getElementById("w-error");
+      if (missing.length) { err.textContent = "Please add " + missing.join(", ") + "."; return; }
+      err.textContent = "";
+      F.sendLead("walkaround", {
+        firstName: form.firstName.value.trim(), phone: form.phone.value.trim(), email: form.email.value.trim(), consent: true,
+        carId: car.id, car: F.carName(car) + " " + car.trim, price: car.price
+      }).then(function () { form.hidden = true; document.getElementById("walk-done").hidden = false; });
+    });
+
+    window.addEventListener("hashchange", function () { location.reload(); });
+  })();
+  </script>
+</body>
+</html>

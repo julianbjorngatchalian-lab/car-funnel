@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" data-stage="conversion">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Indigo Lane Reservation</title>
+  <meta name="description" content="Reserve a car online and we hold it for you for 48 hours.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-head">
+    <div class="wrap">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Indigo Lane Motors</a>
+      <nav class="nav" aria-label="Main">
+        <a href="inventory.html">Inventory</a>
+        <a href="guide.html">Buying guide</a>
+        <a href="test-drive.html#tradein">Trade-in</a>
+        <a href="test-drive.html#prequal">Financing</a>
+        <a class="btn btn-amber" href="test-drive.html" data-track="nav_test_drive">Book a test drive</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="wrap">
+      <div id="no-car" hidden>
+        <h1>Pick a car to reserve</h1>
+        <p class="lede">Open any car and choose "Reserve this car". We'll hold it for you for 48 hours.</p>
+        <a class="btn btn-violet" href="inventory.html">Browse inventory</a>
+      </div>
+
+      <div id="reserve" hidden>
+        <h1>Reserve your car</h1>
+        <p class="lede">We take it off the website and hold it for you for 48 hours. No payment online; you pay when you pick it up.</p>
+
+        <div class="two-col">
+          <div>
+            <div class="urgency" role="note">Reserve now and this car is held for you until <strong id="hold-until"></strong>.</div>
+            <div class="panel">
+              <h2>Your details</h2>
+              <form id="res-form" novalidate>
+                <div class="row2">
+                  <div class="field"><label for="r-first">First name</label><input id="r-first" name="firstName" autocomplete="given-name" maxlength="60"></div>
+                  <div class="field"><label for="r-last">Last name</label><input id="r-last" name="lastName" autocomplete="family-name" maxlength="60"></div>
+                </div>
+                <div class="row2">
+                  <div class="field"><label for="r-phone">Mobile number</label><input id="r-phone" name="phone" type="tel" autocomplete="tel" maxlength="25" placeholder="(555) 123-4567"></div>
+                  <div class="field"><label for="r-email">Email</label><input id="r-email" name="email" type="email" autocomplete="email" maxlength="120"></div>
+                </div>
+                <div class="row2">
+                  <div class="field"><label for="r-pay">How will you pay?</label>
+                    <select id="r-pay" name="payment"><option value="">Choose one</option><option>Financing through the dealership</option><option>My own bank or credit union</option><option>Cash or check</option><option>Not sure yet</option></select>
+                  </div>
+                  <div class="field"><label for="r-trade">Trading in a car?</label>
+                    <select id="r-trade" name="tradeIn"><option value="">Choose one</option><option>Yes</option><option>No</option></select>
+                  </div>
+                </div>
+                <div class="field"><label for="r-pickup">Pickup</label>
+                  <select id="r-pickup" name="pickup"><option value="">Choose one</option><option>Pick up at the dealership</option><option>Home delivery (within 30 miles)</option></select>
+                </div>
+                <label class="consent"><input type="checkbox" id="r-consent" name="consent"><span>I agree to be contacted by phone, text and email about this reservation. Reply STOP to opt out.</span></label>
+                <p class="form-error" id="r-error" role="alert"></p>
+                <button class="btn btn-amber btn-block" type="submit" data-track="reserve_submit">Reserve this car</button>
+                <p class="hint" style="margin:10px 0 0;">Changed your mind? Cancel any time before pickup. Nothing to pay.</p>
+              </form>
+              <div class="success" id="res-done" hidden>
+                <h2>It's reserved</h2>
+                <p id="res-summary"></p>
+                <ol class="timeline" style="margin-top:12px;">
+                  <li><b>Today</b><div><h3>We confirm by text</h3><p>Your salesperson texts you within one business hour.</p></div></li>
+                  <li><b>Before pickup</b><div><h3>Paperwork, done remotely</h3><p>Financing and trade-in are sorted by phone and email, so pickup takes under an hour.</p></div></li>
+                  <li><b>Pickup day</b><div><h3>Sign and drive</h3><p>Bring your license and proof of insurance.</p></div></li>
+                </ol>
+                <a class="btn btn-line" href="welcome.html" data-track="preview_welcome">Preview the owner welcome page (sent after purchase)</a>
+              </div>
+            </div>
+          </div>
+
+          <aside>
+            <div class="ticket">
+              <div class="ticket-head"><p id="t-sub"></p><h2 id="t-name"></h2></div>
+              <table>
+                <tr><td>Vehicle price</td><td id="t-price"></td></tr>
+                <tr><td>Dealer add-ons</td><td>$0</td></tr>
+                <tr><td>Documentation fee</td><td>$0</td></tr>
+                <tr><td>Tax, title and registration</td><td>Set by your state</td></tr>
+                <tr class="total"><td>Price before tax</td><td id="t-total"></td></tr>
+              </table>
+              <p class="note" id="t-est"></p>
+            </div>
+            <ul class="guarantees">
+              <li><strong>7-day, 300-mile return.</strong> Full refund if it isn't right.</li>
+              <li><strong>Inspected before listing.</strong> Inspection sheet handed over at pickup.</li>
+              <li><strong>Price locked.</strong> The price above won't change while it's reserved.</li>
+            </ul>
+            <div class="review" style="margin-top:22px;">
+              <div class="stars" aria-label="5 out of 5">★★★★★</div>
+              <p>Placeholder: a recent buyer's review about the reservation and pickup goes here.</p>
+              <small>Reviewer name, Google review (connect real reviews before launch)</small>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <p><strong>Indigo Lane Motors</strong> Open Mon–Fri 10am–6pm, Sat 10am–3pm ET. Closed Sunday.</p>
+      <p class="demo-note"><strong>Demo funnel.</strong> Indigo Lane Motors is a fictional dealership. Cars, prices and policies are invented. No real reservations are made. Built by Julian Bjorn Gatchalian as a portfolio sample.</p>
+    </div>
+  </footer>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/funnel.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var F = window.Funnel;
+    var car = F.carFromHash();
+    if (!car) { document.getElementById("no-car").hidden = false; return; }
+    F.save("lastCar", car.id);
+    document.getElementById("reserve").hidden = false;
+
+    document.getElementById("t-sub").textContent = car.trim + ", " + F.miles(car.miles);
+    document.getElementById("t-name").textContent = F.carName(car);
+    document.getElementById("t-price").textContent = F.money(car.price);
+    document.getElementById("t-total").textContent = F.money(car.price);
+    document.getElementById("t-est").textContent = "About " + F.money(F.defaultEstimate(car.price)) +
+      "/month with 10% down over 60 months at an example 7.9% APR. Your rate depends on your credit.";
+
+    var holdUntil = new Date(Date.now() + 48 * 3600 * 1000);
+    var holdLabel = new Intl.DateTimeFormat("en-US", { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit", timeZone: F.DEALER_TZ }).format(holdUntil) + " ET";
+    document.getElementById("hold-until").textContent = holdLabel;
+
+    var form = document.getElementById("res-form");
+    F.prefill(form);
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var missing = F.checkForm(form, { firstName: "text", lastName: "text", phone: "phone", email: "email", payment: "select", tradeIn: "select", pickup: "select", consent: "check" },
+        { firstName: "your first name", lastName: "your last name", phone: "a 10-digit mobile number", email: "a valid email", payment: "how you'll pay", tradeIn: "the trade-in answer", pickup: "pickup or delivery", consent: "your OK to contact you" });
+      var err = document.getElementById("r-error");
+      if (missing.length) { err.textContent = "Please add " + missing.join(", ") + "."; return; }
+      err.textContent = "";
+      F.sendLead("reserve", {
+        firstName: form.firstName.value.trim(), lastName: form.lastName.value.trim(),
+        phone: form.phone.value.trim(), email: form.email.value.trim(), consent: true,
+        carId: car.id, car: F.carName(car) + " " + car.trim, price: car.price,
+        payment: form.payment.value, tradeIn: form.tradeIn.value, pickup: form.pickup.value,
+        holdUntil: holdUntil.toISOString()
+      }).then(function (lead) {
+        F.save("purchase", { carId: car.id, firstName: lead.firstName, leadId: lead.leadId });
+        form.hidden = true;
+        document.getElementById("res-done").hidden = false;
+        document.getElementById("res-summary").textContent = F.carName(car) + " " + car.trim + " is held for you until " + holdLabel + ". Reference " + lead.leadId + ".";
+        document.querySelector(".urgency").hidden = true;
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

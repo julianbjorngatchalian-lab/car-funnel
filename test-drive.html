@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en" data-stage="intent">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Indigo Lane Test Drive</title>
+  <meta name="description" content="Book a test drive, get a trade-in offer or get pre-qualified.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-head">
+    <div class="wrap">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Indigo Lane Motors</a>
+      <nav class="nav" aria-label="Main">
+        <a href="inventory.html">Inventory</a>
+        <a href="guide.html">Buying guide</a>
+        <a href="test-drive.html#tradein">Trade-in</a>
+        <a href="test-drive.html#prequal">Financing</a>
+        <a class="btn btn-amber" href="test-drive.html" data-track="nav_test_drive">Book a test drive</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="wrap">
+      <h1 id="page-title">Take the next step</h1>
+      <p class="lede">Book a test drive, find out what your current car is worth, or see what you can afford. Each takes about two minutes.</p>
+
+      <div class="tabs" role="tablist" aria-label="Next steps">
+        <button type="button" class="tab" role="tab" id="tab-drive" aria-controls="panel-drive" data-tab="drive">Test drive</button>
+        <button type="button" class="tab" role="tab" id="tab-tradein" aria-controls="panel-tradein" data-tab="tradein">Trade-in offer</button>
+        <button type="button" class="tab" role="tab" id="tab-prequal" aria-controls="panel-prequal" data-tab="prequal">Get pre-qualified</button>
+      </div>
+
+      <!-- ===== Test drive ===== -->
+      <section id="panel-drive" role="tabpanel" aria-labelledby="tab-drive" hidden>
+        <div class="two-col">
+          <div>
+            <div class="car-chip">
+              <div><p>Car</p><strong id="d-car-name">Choose a car</strong></div>
+              <div class="field" style="margin:0;min-width:220px;">
+                <label for="d-car" class="sr-label" style="font-size:.85rem;">Change car</label>
+                <select id="d-car"></select>
+              </div>
+            </div>
+            <div class="panel">
+              <h2>Pick a time</h2>
+              <p class="hint" style="margin:0 0 14px;">Times are US Eastern. Test drives take about 30 minutes; we'll have the car washed and ready.</p>
+              <div id="slots"></div>
+              <p id="d-picked" class="hint" style="margin:0;">No time selected yet.</p>
+            </div>
+          </div>
+          <div class="panel">
+            <h2>Your details</h2>
+            <form id="drive-form" novalidate>
+              <div class="row2">
+                <div class="field"><label for="d-first">First name</label><input id="d-first" name="firstName" autocomplete="given-name" maxlength="60"></div>
+                <div class="field"><label for="d-last">Last name</label><input id="d-last" name="lastName" autocomplete="family-name" maxlength="60"></div>
+              </div>
+              <div class="field"><label for="d-phone">Mobile number</label><input id="d-phone" name="phone" type="tel" autocomplete="tel" maxlength="25" placeholder="(555) 123-4567"></div>
+              <div class="field"><label for="d-email">Email</label><input id="d-email" name="email" type="email" autocomplete="email" maxlength="120"></div>
+              <div class="field"><label for="d-license">Will the driver bring a valid driver's license?</label>
+                <select id="d-license" name="license"><option value="">Choose one</option><option>Yes</option><option>I'll ask about this</option></select>
+              </div>
+              <label class="consent"><input type="checkbox" id="d-consent" name="consent"><span>I agree to be contacted by phone, text and email about my test drive. Message and data rates may apply. Reply STOP to opt out.</span></label>
+              <p class="form-error" id="d-error" role="alert"></p>
+              <button class="btn btn-amber btn-block" type="submit">Book my test drive</button>
+            </form>
+            <div class="success" id="drive-done" hidden>
+              <h3>You're booked</h3>
+              <p id="drive-summary"></p>
+              <p>We'll text you a confirmation now and a reminder the day before. Bring your license and, if you're trading in, your current car's keys and title.</p>
+              <div class="cta-stack">
+                <a class="btn btn-violet" id="drive-reserve" href="reserve.html" data-track="drive_done_reserve">Reserve this car so nobody else buys it</a>
+                <button type="button" class="btn btn-line" data-goto="tradein">Get my trade-in offer too</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Trade-in ===== -->
+      <section id="panel-tradein" role="tabpanel" aria-labelledby="tab-tradein" hidden>
+        <div class="two-col">
+          <div class="panel">
+            <h2>Tell us about your current car</h2>
+            <form id="trade-form" novalidate>
+              <div class="row2">
+                <div class="field"><label for="t-year">Year</label><input id="t-year" name="year" type="number" min="1990" max="2027" inputmode="numeric"></div>
+                <div class="field"><label for="t-make">Make</label><input id="t-make" name="make" maxlength="40" placeholder="e.g. Toyota"></div>
+              </div>
+              <div class="row2">
+                <div class="field"><label for="t-model">Model and trim</label><input id="t-model" name="model" maxlength="60" placeholder="e.g. Corolla LE"></div>
+                <div class="field"><label for="t-miles">Mileage</label><input id="t-miles" name="miles" type="number" min="0" step="1000" inputmode="numeric"></div>
+              </div>
+              <div class="field"><label for="t-cond">Condition</label>
+                <select id="t-cond" name="condition"><option value="">Choose one</option><option>Excellent: no damage, no warning lights</option><option>Good: minor scratches or wear</option><option>Fair: needs some repairs</option><option>Rough: major damage or not running</option></select>
+              </div>
+              <div class="row2">
+                <div class="field"><label for="t-first">First name</label><input id="t-first" name="firstName" autocomplete="given-name" maxlength="60"></div>
+                <div class="field"><label for="t-phone">Mobile number</label><input id="t-phone" name="phone" type="tel" autocomplete="tel" maxlength="25"></div>
+              </div>
+              <div class="field"><label for="t-email">Email</label><input id="t-email" name="email" type="email" autocomplete="email" maxlength="120"></div>
+              <label class="consent"><input type="checkbox" id="t-consent" name="consent"><span>I agree to be contacted by phone, text and email about my trade-in. Reply STOP to opt out.</span></label>
+              <p class="form-error" id="t-error" role="alert"></p>
+              <button class="btn btn-amber btn-block" type="submit">Get my trade-in offer</button>
+            </form>
+            <div class="success" id="trade-done" hidden>
+              <h3>Got it</h3>
+              <p>An appraiser will text you a written offer within one business hour (Mon–Sat). The offer holds for 7 days and you can use it with or without buying from us.</p>
+            </div>
+          </div>
+          <div>
+            <h2 class="title" style="font-family:var(--display);font-stretch:108%;font-size:1.5rem;margin:0 0 12px;">How the offer works</h2>
+            <ol class="timeline">
+              <li><b>Step 1</b><div><h3>You tell us about the car</h3><p>Year, make, model, mileage and condition.</p></div></li>
+              <li><b>Step 2</b><div><h3>We send a written offer</h3><p>Based on the details you gave and current auction prices.</p></div></li>
+              <li><b>Step 3</b><div><h3>Quick check in person</h3><p>A 15-minute look to confirm condition. If it matches, the offer stands.</p></div></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Pre-qualification ===== -->
+      <section id="panel-prequal" role="tabpanel" aria-labelledby="tab-prequal" hidden>
+        <div class="two-col">
+          <div class="panel">
+            <h2>See what you can afford</h2>
+            <p class="hint" style="margin:0 0 14px;">No credit check at this step and no Social Security number needed. You'll see a price range right away.</p>
+            <form id="pq-form" novalidate>
+              <div class="row2">
+                <div class="field"><label for="pq-budget">Monthly budget</label>
+                  <select id="pq-budget" name="budget"><option value="">Choose one</option><option value="250">Up to $250</option><option value="350">Up to $350</option><option value="450">Up to $450</option><option value="550">Up to $550</option><option value="700">Up to $700</option></select>
+                </div>
+                <div class="field"><label for="pq-down">Down payment ($)</label><input id="pq-down" name="down" type="number" min="0" step="500" value="2000" inputmode="numeric"></div>
+              </div>
+              <div class="field"><label for="pq-credit">How would you describe your credit?</label>
+                <select id="pq-credit" name="credit"><option value="">Choose one</option><option value="excellent">Excellent</option><option value="good">Good</option><option value="fair">Fair</option><option value="building">Building or rebuilding</option><option value="unsure">Not sure</option></select>
+              </div>
+              <div class="field"><label for="pq-job">Employment</label>
+                <select id="pq-job" name="employment"><option value="">Choose one</option><option>Full-time</option><option>Part-time</option><option>Self-employed</option><option>Retired</option><option>Other</option></select>
+              </div>
+              <div class="row2">
+                <div class="field"><label for="pq-first">First name</label><input id="pq-first" name="firstName" autocomplete="given-name" maxlength="60"></div>
+                <div class="field"><label for="pq-phone">Mobile number</label><input id="pq-phone" name="phone" type="tel" autocomplete="tel" maxlength="25"></div>
+              </div>
+              <div class="field"><label for="pq-email">Email</label><input id="pq-email" name="email" type="email" autocomplete="email" maxlength="120"></div>
+              <label class="consent"><input type="checkbox" id="pq-consent" name="consent"><span>I agree to be contacted by phone, text and email about financing. Reply STOP to opt out.</span></label>
+              <p class="form-error" id="pq-error" role="alert"></p>
+              <button class="btn btn-amber btn-block" type="submit">Show my price range</button>
+            </form>
+          </div>
+          <div id="pq-result-wrap">
+            <div class="panel" id="pq-empty">
+              <h3>Your price range will appear here</h3>
+              <p class="hint" style="margin:0;">We'll also show the cars on our lot that fit it.</p>
+            </div>
+            <div id="pq-result" hidden>
+              <div class="success">
+                <h3>You could shop up to about <span id="pq-max"></span></h3>
+                <p id="pq-math" class="calc-math"></p>
+                <p class="hint" style="margin:0;">Example rates for this demo only, not a loan offer. A finance manager confirms your real rate.</p>
+              </div>
+              <h3 style="font-family:var(--display);font-stretch:108%;margin:24px 0 12px;" id="pq-fit-title"></h3>
+              <div class="sticker-grid fit" id="pq-fit"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <p><strong>Indigo Lane Motors</strong> Open Mon–Fri 10am–6pm, Sat 10am–3pm ET. Closed Sunday.</p>
+      <p class="demo-note"><strong>Demo funnel.</strong> Indigo Lane Motors is a fictional dealership. Cars, prices and policies are invented. Built by Julian Bjorn Gatchalian as a portfolio sample.</p>
+    </div>
+  </footer>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/funnel.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var F = window.Funnel;
+    var CARS = window.INVENTORY;
+
+    // ---------- tabs (hash: car id, "tradein" or "prequal") ----------
+    var titles = { drive: "Book a test drive", tradein: "Get a trade-in offer", prequal: "Get pre-qualified" };
+    function openTab(name) {
+      ["drive", "tradein", "prequal"].forEach(function (t) {
+        document.getElementById("tab-" + t).setAttribute("aria-selected", t === name ? "true" : "false");
+        document.getElementById("panel-" + t).hidden = t !== name;
+      });
+      document.getElementById("page-title").textContent = titles[name];
+    }
+    document.querySelectorAll(".tab").forEach(function (b) {
+      b.addEventListener("click", function () { openTab(b.dataset.tab); F.track("tab", { tab: b.dataset.tab }); });
+    });
+    document.querySelectorAll("[data-goto]").forEach(function (b) {
+      b.addEventListener("click", function () { openTab(b.dataset.goto); window.scrollTo(0, 0); });
+    });
+    var hash = (location.hash || "").replace("#", "");
+    openTab(hash === "tradein" || hash === "prequal" ? hash : "drive");
+
+    // ---------- test drive ----------
+    var car = F.getCar(hash) || F.getCar(F.load("lastCar"));
+    var select = document.getElementById("d-car");
+    select.innerHTML = '<option value="">Not sure yet, help me choose</option>' + CARS.map(function (c) {
+      return '<option value="' + c.id + '">' + F.esc(F.carName(c) + " " + c.trim + ", " + F.money(c.price)) + '</option>';
+    }).join("");
+    function setCar(c) {
+      car = c;
+      select.value = c ? c.id : "";
+      document.getElementById("d-car-name").textContent = c ? F.carName(c) + " " + c.trim : "Not sure yet";
+      if (c) F.save("lastCar", c.id);
+    }
+    setCar(car);
+    select.addEventListener("change", function () { setCar(F.getCar(select.value)); });
+
+    var picked = null;
+    F.renderSlotPicker(document.getElementById("slots"), F.buildSlots(6), function (slot, day) {
+      picked = slot ? { slot: slot, day: day } : null;
+      document.getElementById("d-picked").textContent = picked ? "Selected: " + day.label + " at " + slot.label + " ET" : "No time selected yet.";
+    });
+
+    var dForm = document.getElementById("drive-form");
+    F.prefill(dForm);
+    dForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var missing = F.checkForm(dForm, { firstName: "text", lastName: "text", phone: "phone", email: "email", license: "select", consent: "check" },
+        { firstName: "your first name", lastName: "your last name", phone: "a 10-digit mobile number", email: "a valid email", license: "the license answer", consent: "your OK to contact you" });
+      if (!picked) missing.unshift("a test drive time");
+      var err = document.getElementById("d-error");
+      if (missing.length) { err.textContent = "Please add " + missing.join(", ") + "."; return; }
+      err.textContent = "";
+      var label = picked.day.label + " at " + picked.slot.label + " ET";
+      F.sendLead("test_drive", {
+        firstName: dForm.firstName.value.trim(), lastName: dForm.lastName.value.trim(),
+        phone: dForm.phone.value.trim(), email: dForm.email.value.trim(), consent: true,
+        license: dForm.license.value,
+        carId: car ? car.id : "", car: car ? F.carName(car) + " " + car.trim : "Not sure yet",
+        slotLocal: picked.slot.key, slotTz: F.DEALER_TZ, slotIso: picked.slot.iso, slotLabel: label
+      }).then(function () {
+        dForm.hidden = true;
+        document.getElementById("drive-done").hidden = false;
+        document.getElementById("drive-summary").textContent = (car ? F.carName(car) + " " + car.trim : "A test drive (we'll help you choose)") + ", " + label + ".";
+        var r = document.getElementById("drive-reserve");
+        if (car) r.href = "reserve.html#" + car.id; else r.hidden = true;
+      });
+    });
+
+    // ---------- trade-in ----------
+    var tForm = document.getElementById("trade-form");
+    F.prefill(tForm);
+    tForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var missing = F.checkForm(tForm, { year: "text", make: "text", model: "text", miles: "text", condition: "select", firstName: "text", phone: "phone", email: "email", consent: "check" },
+        { year: "the year", make: "the make", model: "the model", miles: "the mileage", condition: "the condition", firstName: "your first name", phone: "a 10-digit mobile number", email: "a valid email", consent: "your OK to contact you" });
+      var yr = +tForm.year.value;
+      if (tForm.year.value && (yr < 1990 || yr > 2027)) { missing.push("a year between 1990 and 2027"); tForm.year.setAttribute("aria-invalid", "true"); }
+      var err = document.getElementById("t-error");
+      if (missing.length) { err.textContent = "Please add " + missing.join(", ") + "."; return; }
+      err.textContent = "";
+      F.sendLead("trade_in", {
+        firstName: tForm.firstName.value.trim(), phone: tForm.phone.value.trim(), email: tForm.email.value.trim(), consent: true,
+        tradeIn: { year: yr, make: tForm.make.value.trim(), model: tForm.model.value.trim(), miles: +tForm.miles.value, condition: tForm.condition.value },
+        carId: car ? car.id : ""
+      }).then(function () { tForm.hidden = true; document.getElementById("trade-done").hidden = false; });
+    });
+
+    // ---------- pre-qualification ----------
+    // Example APRs by self-reported credit, for the demo estimate only.
+    var EXAMPLE_APR = { excellent: 6.9, good: 8.9, fair: 12.9, building: 16.9, unsure: 12.9 };
+    var TERM = 60;
+    // Largest loan a monthly budget M supports: P = M × (1 − (1 + r)^−n) / r
+    function affordableLoan(M, aprPct, n) {
+      var r = aprPct / 12 / 100;
+      return r === 0 ? M * n : M * (1 - Math.pow(1 + r, -n)) / r;
+    }
+    var pq = document.getElementById("pq-form");
+    F.prefill(pq);
+    pq.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var missing = F.checkForm(pq, { budget: "select", credit: "select", employment: "select", firstName: "text", phone: "phone", email: "email", consent: "check" },
+        { budget: "your monthly budget", credit: "your credit description", employment: "your employment", firstName: "your first name", phone: "a 10-digit mobile number", email: "a valid email", consent: "your OK to contact you" });
+      var err = document.getElementById("pq-error");
+      if (missing.length) { err.textContent = "Please add " + missing.join(", ") + "."; return; }
+      err.textContent = "";
+
+      var M = +pq.budget.value, down = Math.max(0, +pq.down.value || 0), apr = EXAMPLE_APR[pq.credit.value];
+      var loan = affordableLoan(M, apr, TERM);
+      var maxPrice = Math.floor((loan + down) / 100) * 100;
+      document.getElementById("pq-max").textContent = F.money(maxPrice);
+      document.getElementById("pq-math").textContent =
+        F.money(M) + "/month for " + TERM + " months at an example " + apr + "% APR supports a loan of about " + F.money(loan) +
+        ", plus your " + F.money(down) + " down.";
+      var fits = CARS.filter(function (c) { return c.price <= maxPrice; }).sort(function (a, b) { return b.price - a.price; });
+      document.getElementById("pq-fit-title").textContent = fits.length
+        ? fits.length + (fits.length === 1 ? " car" : " cars") + " on our lot fit this range"
+        : "Nothing on the lot fits this range yet. Try a bigger down payment, or we'll watch for one.";
+      document.getElementById("pq-fit").innerHTML = fits.slice(0, 3).map(function (c) { return F.stickerHtml(c); }).join("");
+      document.getElementById("pq-empty").hidden = true;
+      document.getElementById("pq-result").hidden = false;
+
+      F.sendLead("prequal", {
+        firstName: pq.firstName.value.trim(), phone: pq.phone.value.trim(), email: pq.email.value.trim(), consent: true,
+        prequal: { budget: M, down: down, credit: pq.credit.value, employment: pq.employment.value, maxPrice: maxPrice }
+      });
+      if (window.matchMedia("(max-width: 960px)").matches) document.getElementById("pq-result").scrollIntoView({ block: "start" });
+    });
+
+    window.addEventListener("hashchange", function () {
+      var h = (location.hash || "").replace("#", "");
+      if (h === "tradein" || h === "prequal") openTab(h);
+      else if (F.getCar(h)) { setCar(F.getCar(h)); openTab("drive"); }
+    });
+  })();
+  </script>
+</body>
+</html>

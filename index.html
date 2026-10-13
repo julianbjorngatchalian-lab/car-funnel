@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en" data-stage="awareness">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Indigo Lane Motors</title>
+  <meta name="description" content="Demo funnel: inspected used cars with up-front pricing from a fictional dealership.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-head">
+    <div class="wrap">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Indigo Lane Motors</a>
+      <nav class="nav" aria-label="Main">
+        <a href="inventory.html">Inventory</a>
+        <a href="guide.html">Buying guide</a>
+        <a href="test-drive.html#tradein">Trade-in</a>
+        <a href="test-drive.html#prequal">Financing</a>
+        <a class="btn btn-amber" href="test-drive.html" data-track="nav_test_drive">Book a test drive</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- TOFU: first impression from ads, social and search -->
+    <section class="hero on-night">
+      <div class="wrap">
+        <h1>Good used cars, priced up front.</h1>
+        <p class="lede">Every car is inspected, history-checked and sold at the price on the sticker, with no added dealer fees. Tell us what you're shopping for and we'll show you the right cars first.</p>
+
+        <div class="persona-picker">
+          <h2>What are you shopping for?</h2>
+          <div class="personas">
+            <a class="persona" href="inventory.html#first" data-track="persona_first"><strong>My first car</strong><span>Reliable picks, most under $20,000, with financing help</span></a>
+            <a class="persona" href="inventory.html#family" data-track="persona_family"><strong>Room for the family</strong><span>SUVs, minivans and 3-row seating</span></a>
+            <a class="persona" href="inventory.html#commute" data-track="persona_commute"><strong>An easy commute</strong><span>Sedans and hybrids for the daily drive</span></a>
+          </div>
+          <div class="hero-alt">
+            <a class="btn btn-amber" href="inventory.html" data-track="hero_browse_all">Browse all 12 cars</a>
+            <a class="btn btn-line-light" href="test-drive.html#tradein" data-track="hero_trade_in">Get a trade-in offer</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head"><h2 class="title">How we sell cars</h2></div>
+        <div class="promise">
+          <div><h3>Inspected before it's listed</h3><p>Our technicians check brakes, tires, fluids and electronics, and fix what fails before a car goes on the lot.</p></div>
+          <div><h3>The sticker price is the price</h3><p>No dealer add-ons and no documentation fee. Tax and registration are the only extras, set by the state.</p></div>
+          <div><h3>7 days to change your mind</h3><p>Drive it for a week. If it's not right, bring it back for a full refund, up to 300 miles.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-mist">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2 class="title">Just arrived</h2>
+            <p class="sub">Monthly estimates assume 10% down, 60 months at 7.9% APR. Your rate depends on your credit.</p>
+          </div>
+          <a class="btn btn-line" href="inventory.html" data-track="featured_see_all">See all inventory</a>
+        </div>
+        <div class="sticker-grid fit" id="featured"></div>
+      </div>
+    </section>
+
+    <!-- TOFU content: SEO guide + lead magnet -->
+    <section class="section">
+      <div class="wrap split">
+        <div class="guide-teaser">
+          <p class="kicker">Buying guide</p>
+          <h3>How to check a used car before you buy: 12 things to look at</h3>
+          <p>What to look for on the outside, under the hood and on the test drive, plus the paperwork questions that save you from a bad deal. About an 8-minute read.</p>
+          <a class="btn btn-violet" href="guide.html" data-track="guide_read">Read the guide</a>
+        </div>
+
+        <div class="optin">
+          <h3>Get the printable inspection checklist</h3>
+          <p>A one-page version of the guide to take to any dealer, including us. We'll email it to you.</p>
+          <form id="checklist-form" novalidate>
+            <div class="row2">
+              <div class="field"><label for="ck-first">First name</label><input id="ck-first" name="firstName" autocomplete="given-name" maxlength="60"></div>
+              <div class="field"><label for="ck-email">Email</label><input id="ck-email" name="email" type="email" autocomplete="email" maxlength="120"></div>
+            </div>
+            <label class="consent"><input type="checkbox" id="ck-consent" name="consent"><span>Send me the checklist and occasional buying tips by email. Unsubscribe any time.</span></label>
+            <p class="form-error" id="ck-error" role="alert"></p>
+            <button class="btn btn-amber btn-block" type="submit">Email me the checklist</button>
+          </form>
+          <div class="optin-done" id="ck-done" hidden>
+            <p><strong>Check your inbox.</strong> The checklist is on its way. You can also open it now.</p>
+            <a class="btn btn-amber" href="guide.html#checklist">Open the checklist</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-mist">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2 class="title">What buyers say</h2>
+            <p class="sub">Placeholder reviews for layout only. Connect the dealership's real Google reviews before launch.</p>
+          </div>
+        </div>
+        <div class="reviews">
+          <div class="review"><div class="stars" aria-label="5 out of 5">★★★★★</div><p>Placeholder: a first-time buyer's review about financing help goes here.</p><small>Reviewer name, Google review</small></div>
+          <div class="review"><div class="stars" aria-label="5 out of 5">★★★★★</div><p>Placeholder: a family's review about choosing an SUV goes here.</p><small>Reviewer name, Google review</small></div>
+          <div class="review"><div class="stars" aria-label="5 out of 5">★★★★★</div><p>Placeholder: a trade-in review about the offer process goes here.</p><small>Reviewer name, Google review</small></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <p><strong>Indigo Lane Motors</strong> Open Mon–Fri 10am–6pm, Sat 10am–3pm ET. Closed Sunday.</p>
+      <p class="demo-note"><strong>Demo funnel.</strong> Indigo Lane Motors is a fictional dealership. Cars, prices and policies are invented. Built by Julian Bjorn Gatchalian as a portfolio sample.</p>
+    </div>
+  </footer>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/funnel.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var F = window.Funnel;
+
+    document.getElementById("featured").innerHTML =
+      ["c03", "c05", "c08"].map(function (id) { return F.stickerHtml(F.getCar(id)); }).join("");
+
+    var form = document.getElementById("checklist-form");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var missing = F.checkForm(form, { firstName: "text", email: "email", consent: "check" },
+        { firstName: "your first name", email: "a valid email", consent: "your OK to email you" });
+      var err = document.getElementById("ck-error");
+      if (missing.length) { err.textContent = "Please add " + missing.join(", ") + "."; return; }
+      err.textContent = "";
+      F.sendLead("checklist", { firstName: form.firstName.value.trim(), email: form.email.value.trim(), consent: true })
+        .then(function () { form.hidden = true; document.getElementById("ck-done").hidden = false; });
+    });
+  })();
+  </script>
+</body>
+</html>

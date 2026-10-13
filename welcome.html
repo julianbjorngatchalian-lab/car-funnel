@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en" data-stage="loyalty">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Indigo Lane Owner Welcome</title>
+  <meta name="description" content="After-purchase onboarding, service reminders, referrals and reviews.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-head">
+    <div class="wrap">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Indigo Lane Motors</a>
+      <nav class="nav" aria-label="Main">
+        <a href="inventory.html">Inventory</a>
+        <a href="guide.html">Buying guide</a>
+        <a href="test-drive.html#tradein">Trade-in</a>
+        <a href="test-drive.html#prequal">Financing</a>
+        <a class="btn btn-amber" href="#refer" data-track="nav_refer">Refer a friend</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero on-night" style="padding-block: 48px 56px;">
+      <div class="wrap">
+        <h1 id="w-title">Welcome to the Indigo Lane family.</h1>
+        <p class="lede" id="w-lede">Here's everything for your first month with your car, plus a few ways we keep looking after you.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap split">
+        <div>
+          <h2 class="title">Your first 30 days</h2>
+          <p class="sub">A short onboarding plan so nothing slips.</p>
+        </div>
+        <ol class="timeline">
+          <li><b>Day 1</b><div><h3>Set up the car</h3><p>Pair your phone, set your seat and mirrors, and save our service number.</p></div></li>
+          <li><b>Days 1–7</b><div><h3>Your return window</h3><p>Drive it on your real routes. Anything feel off? Call us within 7 days or 300 miles.</p></div></li>
+          <li><b>Week 2</b><div><h3>Check-in call</h3><p>Your salesperson calls to answer questions about features or paperwork.</p></div></li>
+          <li><b>Within 30 days</b><div><h3>Title and registration</h3><p>We text you when your registration is processed. Timing depends on your state.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section-mist">
+      <div class="wrap split">
+        <div>
+          <h2 class="title">Never miss a service</h2>
+          <p class="sub">We'll remind you when your owner's manual says service is due, and book it in one reply.</p>
+        </div>
+        <div class="panel">
+          <form id="svc-form" novalidate>
+            <div class="row2">
+              <div class="field"><label for="s-first">First name</label><input id="s-first" name="firstName" autocomplete="given-name" maxlength="60"></div>
+              <div class="field"><label for="s-miles">Current mileage</label><input id="s-miles" name="miles" type="number" min="0" step="100" inputmode="numeric"></div>
+            </div>
+            <div class="row2">
+              <div class="field"><label for="s-phone">Mobile number</label><input id="s-phone" name="phone" type="tel" autocomplete="tel" maxlength="25"></div>
+              <div class="field"><label for="s-email">Email</label><input id="s-email" name="email" type="email" autocomplete="email" maxlength="120"></div>
+            </div>
+            <div class="field"><label for="s-channel">Remind me by</label>
+              <select id="s-channel" name="channel"><option value="">Choose one</option><option>Text</option><option>Email</option><option>Both</option></select>
+            </div>
+            <label class="consent"><input type="checkbox" id="s-consent" name="consent"><span>Send me service reminders. Reply STOP or unsubscribe any time.</span></label>
+            <p class="form-error" id="s-error" role="alert"></p>
+            <button class="btn btn-violet btn-block" type="submit">Turn on service reminders</button>
+          </form>
+          <div class="success" id="svc-done" hidden><h3>Reminders are on</h3><p>We'll be in touch before your next service is due.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section on-night" id="refer">
+      <div class="wrap split">
+        <div>
+          <h2 class="title" style="color: var(--paper);">Give $200, get $200</h2>
+          <p>When a friend buys a car with your code, they get $200 off and you get $200. No limit on how many friends you refer.</p>
+          <div class="code-box">
+            <output id="ref-code" aria-live="polite">Your code</output>
+            <button type="button" class="btn btn-amber" id="ref-copy" data-track="referral_copy">Copy share message</button>
+          </div>
+          <p id="ref-copied" class="hint" style="color:#c9cbf3;" aria-live="polite"></p>
+        </div>
+        <div class="panel" style="background: var(--indigo); border-color: #3e378f;">
+          <h3 style="color: var(--paper);">Or tell us who to contact</h3>
+          <p style="margin: 0 0 14px;">Only share a friend's number if they've said it's OK for us to reach out.</p>
+          <form id="ref-form" novalidate>
+            <div class="row2">
+              <div class="field"><label for="f-name" style="color:#e1e2ff;">Friend's first name</label><input id="f-name" name="friendName" maxlength="60"></div>
+              <div class="field"><label for="f-phone" style="color:#e1e2ff;">Friend's mobile</label><input id="f-phone" name="friendPhone" type="tel" maxlength="25"></div>
+            </div>
+            <label class="consent"><input type="checkbox" id="f-ok" name="friendOk"><span>My friend agreed to be contacted by Indigo Lane Motors.</span></label>
+            <p class="form-error" id="f-error" role="alert" style="color:#ffcfc7;"></p>
+            <button class="btn btn-amber btn-block" type="submit">Send my referral</button>
+          </form>
+          <div class="optin-done" id="ref-done" hidden style="background: var(--night);"><p style="margin:0;"><strong>Thanks.</strong> We'll reach out to your friend and mention you.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap split">
+        <div>
+          <h2 class="title">How did we do?</h2>
+          <p class="sub">Your review helps other buyers, good or bad.</p>
+        </div>
+        <div class="panel">
+          <p style="margin:0 0 8px;font-weight:600;" id="rate-label">Rate your buying experience</p>
+          <div class="stars-input" role="group" aria-labelledby="rate-label" id="stars"></div>
+          <div id="rev-next" hidden style="margin-top:16px;">
+            <p class="hint" style="margin:0 0 10px;">Post your review on Google so other buyers can see it:</p>
+            <a class="btn btn-violet" href="#review-link-placeholder" id="google-link" data-track="review_google">Write a Google review</a>
+            <p class="hint" style="margin:10px 0 16px;">(Demo: replace this link with the dealership's Google review link.)</p>
+            <form id="rev-form" novalidate>
+              <div class="field"><label for="rv-text">Anything we should fix? This goes straight to the manager (optional)</label><textarea id="rv-text" name="feedback" rows="3" maxlength="1000"></textarea></div>
+              <button class="btn btn-line" type="submit">Send private feedback</button>
+            </form>
+            <div class="success" id="rev-done" hidden><p style="margin:0;">Thank you. The manager reads every note.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <p><strong>Indigo Lane Motors</strong> Service: Mon–Fri 8am–5pm ET.</p>
+      <p class="demo-note"><strong>Demo funnel.</strong> Indigo Lane Motors is a fictional dealership. The referral reward and policies are invented. Built by Julian Bjorn Gatchalian as a portfolio sample.</p>
+    </div>
+  </footer>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/funnel.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var F = window.Funnel;
+    var purchase = F.load("purchase") || {};
+    var contact = F.load("contact") || {};
+    var car = F.getCar(purchase.carId) || F.getCar(F.load("lastCar"));
+    var name = purchase.firstName || contact.firstName || "";
+
+    if (name) document.getElementById("w-title").textContent = "Welcome to the Indigo Lane family, " + name + ".";
+    if (car) document.getElementById("w-lede").textContent =
+      "Enjoy your " + F.carName(car) + " " + car.trim + ". Here's everything for your first month, plus a few ways we keep looking after you.";
+
+    // ---- service reminders ----
+    var svc = document.getElementById("svc-form");
+    F.prefill(svc);
+    svc.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var missing = F.checkForm(svc, { firstName: "text", miles: "text", phone: "phone", email: "email", channel: "select", consent: "check" },
+        { firstName: "your first name", miles: "your current mileage", phone: "a 10-digit mobile number", email: "a valid email", channel: "how to remind you", consent: "your OK to send reminders" });
+      var err = document.getElementById("s-error");
+      if (missing.length) { err.textContent = "Please add " + missing.join(", ") + "."; return; }
+      err.textContent = "";
+      F.sendLead("service", {
+        firstName: svc.firstName.value.trim(), phone: svc.phone.value.trim(), email: svc.email.value.trim(), consent: true,
+        miles: +svc.miles.value, channel: svc.channel.value, carId: car ? car.id : ""
+      }).then(function () { svc.hidden = true; document.getElementById("svc-done").hidden = false; });
+    });
+
+    // ---- referral code ----
+    var code = F.load("refCode");
+    if (!code) {
+      var base = (name || "FRIEND").toUpperCase().replace(/[^A-Z]/g, "").slice(0, 6) || "FRIEND";
+      code = base + "-" + Math.random().toString(36).slice(2, 6).toUpperCase();
+      F.save("refCode", code);
+    }
+    document.getElementById("ref-code").textContent = code;
+    var shareText = "I bought my car at Indigo Lane Motors. Use my code " + code + " and you get $200 off yours.";
+    document.getElementById("ref-copy").addEventListener("click", function () {
+      var out = document.getElementById("ref-copied");
+      function fallback() {
+        out.textContent = "Copy this: " + shareText;
+        var range = document.createRange(); range.selectNodeContents(out);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+      }
+      try {
+        navigator.clipboard.writeText(shareText).then(function () { out.textContent = "Copied. Paste it into a text or post."; }, fallback);
+      } catch (err) { fallback(); }
+    });
+
+    var ref = document.getElementById("ref-form");
+    ref.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var missing = F.checkForm(ref, { friendName: "text", friendPhone: "phone", friendOk: "check" },
+        { friendName: "your friend's first name", friendPhone: "their 10-digit mobile number", friendOk: "confirmation they agreed" });
+      var err = document.getElementById("f-error");
+      if (missing.length) { err.textContent = "Please add " + missing.join(", ") + "."; return; }
+      err.textContent = "";
+      F.sendLead("referral", {
+        firstName: name, email: contact.email || "", phone: contact.phone || "",
+        referral: { code: code, friendName: ref.friendName.value.trim(), friendPhone: ref.friendPhone.value.trim() }
+      }).then(function () { ref.hidden = true; document.getElementById("ref-done").hidden = false; });
+    });
+
+    // ---- review request (same options for every rating) ----
+    var stars = document.getElementById("stars"), rating = 0;
+    for (var i = 1; i <= 5; i++) {
+      (function (n) {
+        var b = document.createElement("button");
+        b.type = "button"; b.textContent = "★"; b.setAttribute("aria-label", n + (n === 1 ? " star" : " stars")); b.setAttribute("aria-pressed", "false");
+        b.addEventListener("click", function () {
+          rating = n;
+          Array.prototype.forEach.call(stars.children, function (s, j) { s.setAttribute("aria-pressed", j < n ? "true" : "false"); });
+          document.getElementById("rev-next").hidden = false;
+          F.track("rating", { rating: n });
+        });
+        stars.appendChild(b);
+      })(i);
+    }
+    var rev = document.getElementById("rev-form");
+    rev.addEventListener("submit", function (e) {
+      e.preventDefault();
+      F.sendLead("review", {
+        firstName: name, email: contact.email || "", phone: contact.phone || "",
+        review: { rating: rating, feedback: rev.feedback.value.trim() }, carId: car ? car.id : ""
+      }).then(function () { rev.hidden = true; document.getElementById("rev-done").hidden = false; });
+    });
+  })();
+  </script>
+</body>
+</html>

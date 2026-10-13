@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en" data-stage="interest">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Indigo Lane Inventory</title>
+  <meta name="description" content="Browse, filter and compare inspected used cars.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-head">
+    <div class="wrap">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Indigo Lane Motors</a>
+      <nav class="nav" aria-label="Main">
+        <a href="inventory.html" aria-current="page">Inventory</a>
+        <a href="guide.html">Buying guide</a>
+        <a href="test-drive.html#tradein">Trade-in</a>
+        <a href="test-drive.html#prequal">Financing</a>
+        <a class="btn btn-amber" href="test-drive.html" data-track="nav_test_drive">Book a test drive</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="wrap">
+      <h1>Find your next car</h1>
+      <p class="lede">Filter by what matters to you, then tick up to three cars to compare side by side.</p>
+
+      <div class="inv-layout">
+        <aside class="filters" aria-label="Filters">
+          <h2>Filter</h2>
+          <fieldset>
+            <legend>Shopping for</legend>
+            <div class="chips" id="f-persona">
+              <button type="button" class="chip" data-value="">Anything</button>
+              <button type="button" class="chip" data-value="first">First car</button>
+              <button type="button" class="chip" data-value="family">Family</button>
+              <button type="button" class="chip" data-value="commute">Commute</button>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Body type</legend>
+            <div class="chips" id="f-body"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Fuel</legend>
+            <div class="chips" id="f-fuel">
+              <button type="button" class="chip" data-value="">Any</button>
+              <button type="button" class="chip" data-value="Gas">Gas</button>
+              <button type="button" class="chip" data-value="Hybrid">Hybrid</button>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend><label for="f-price">Max price: <span class="range-out" id="f-price-out"></span></label></legend>
+            <input type="range" id="f-price" min="15000" max="35000" step="500" value="35000">
+          </fieldset>
+          <fieldset>
+            <legend><label for="f-miles">Max mileage: <span class="range-out" id="f-miles-out"></span></label></legend>
+            <input type="range" id="f-miles" min="20000" max="80000" step="5000" value="80000">
+          </fieldset>
+          <button type="button" class="btn btn-line" id="f-reset">Clear filters</button>
+        </aside>
+
+        <section aria-label="Results">
+          <div class="persona-note" id="persona-note" hidden>
+            <div><strong id="pn-title"></strong><p id="pn-text"></p></div>
+            <a class="btn btn-amber" href="test-drive.html#prequal" data-track="persona_prequal">See what I qualify for</a>
+          </div>
+          <div class="results-bar">
+            <p id="count" aria-live="polite"></p>
+            <label>Sort
+              <select id="sort">
+                <option value="price-asc">Price: low to high</option>
+                <option value="price-desc">Price: high to low</option>
+                <option value="miles-asc">Mileage: lowest first</option>
+                <option value="year-desc">Year: newest first</option>
+              </select>
+            </label>
+          </div>
+          <div class="sticker-grid" id="results"></div>
+
+          <div class="compare-tray" id="tray" hidden>
+            <p id="tray-text"></p>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button type="button" class="btn btn-line-light" id="tray-clear">Clear</button>
+              <button type="button" class="btn btn-amber" id="tray-go" data-track="compare_open">Compare now</button>
+            </div>
+          </div>
+
+          <div id="compare" hidden>
+            <div class="section-head" style="margin: 36px 0 0;">
+              <h2 class="title" style="font-family: var(--display); font-stretch:110%; font-size: 1.8rem; margin:0;">Side-by-side comparison</h2>
+            </div>
+            <div class="compare-wrap"><table class="compare-table" id="compare-table"></table></div>
+            <p class="hint" style="margin-top:10px;">Green marks the best value in a row. Monthly estimates assume 10% down, 60 months at 7.9% APR.</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <p><strong>Indigo Lane Motors</strong> Open Mon–Fri 10am–6pm, Sat 10am–3pm ET. Closed Sunday.</p>
+      <p class="demo-note"><strong>Demo funnel.</strong> Indigo Lane Motors is a fictional dealership. Cars, prices and policies are invented. Built by Julian Bjorn Gatchalian as a portfolio sample.</p>
+    </div>
+  </footer>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/funnel.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var F = window.Funnel;
+    var CARS = window.INVENTORY;
+    var bodies = [];
+    CARS.forEach(function (c) { if (bodies.indexOf(c.body) < 0) bodies.push(c.body); });
+
+    var state = { persona: "", bodies: [], fuel: "", maxPrice: 35000, maxMiles: 80000, sort: "price-asc", compare: [] };
+    var hash = (location.hash || "").replace("#", "");
+    if (window.PERSONAS[hash]) state.persona = hash;
+
+    // ---- build body chips ----
+    var bodyWrap = document.getElementById("f-body");
+    bodyWrap.innerHTML = bodies.map(function (b) { return '<button type="button" class="chip" data-value="' + b + '">' + b + '</button>'; }).join("");
+
+    function setSingle(groupId, value) {
+      document.querySelectorAll("#" + groupId + " .chip").forEach(function (c) { c.setAttribute("aria-pressed", c.dataset.value === value ? "true" : "false"); });
+    }
+    function syncControls() {
+      setSingle("f-persona", state.persona);
+      setSingle("f-fuel", state.fuel);
+      document.querySelectorAll("#f-body .chip").forEach(function (c) { c.setAttribute("aria-pressed", state.bodies.indexOf(c.dataset.value) >= 0 ? "true" : "false"); });
+      document.getElementById("f-price").value = state.maxPrice;
+      document.getElementById("f-miles").value = state.maxMiles;
+      document.getElementById("f-price-out").textContent = F.money(state.maxPrice);
+      document.getElementById("f-miles-out").textContent = F.miles(state.maxMiles);
+      document.getElementById("sort").value = state.sort;
+    }
+
+    document.getElementById("f-persona").addEventListener("click", function (e) {
+      var c = e.target.closest(".chip"); if (!c) return;
+      state.persona = c.dataset.value; F.track("filter", { persona: state.persona || "any" }); render();
+    });
+    document.getElementById("f-fuel").addEventListener("click", function (e) {
+      var c = e.target.closest(".chip"); if (!c) return;
+      state.fuel = c.dataset.value; render();
+    });
+    bodyWrap.addEventListener("click", function (e) {
+      var c = e.target.closest(".chip"); if (!c) return;
+      var i = state.bodies.indexOf(c.dataset.value);
+      if (i >= 0) state.bodies.splice(i, 1); else state.bodies.push(c.dataset.value);
+      render();
+    });
+    document.getElementById("f-price").addEventListener("input", function (e) { state.maxPrice = +e.target.value; render(); });
+    document.getElementById("f-miles").addEventListener("input", function (e) { state.maxMiles = +e.target.value; render(); });
+    document.getElementById("sort").addEventListener("change", function (e) { state.sort = e.target.value; render(); });
+    document.getElementById("f-reset").addEventListener("click", function () {
+      state.persona = ""; state.bodies = []; state.fuel = ""; state.maxPrice = 35000; state.maxMiles = 80000; render();
+    });
+
+    function filtered() {
+      var list = CARS.filter(function (c) {
+        return (!state.persona || c.personas.indexOf(state.persona) >= 0) &&
+          (!state.bodies.length || state.bodies.indexOf(c.body) >= 0) &&
+          (!state.fuel || c.fuel === state.fuel) &&
+          c.price <= state.maxPrice && c.miles <= state.maxMiles;
+      });
+      var s = state.sort;
+      list.sort(function (a, b) {
+        if (s === "price-desc") return b.price - a.price;
+        if (s === "miles-asc") return a.miles - b.miles;
+        if (s === "year-desc") return b.year - a.year || a.price - b.price;
+        return a.price - b.price;
+      });
+      return list;
+    }
+
+    function render() {
+      syncControls();
+      var note = document.getElementById("persona-note");
+      if (state.persona) {
+        var p = window.PERSONAS[state.persona];
+        document.getElementById("pn-title").textContent = p.headline;
+        document.getElementById("pn-text").textContent = p.note;
+        note.hidden = false;
+      } else { note.hidden = true; }
+
+      var list = filtered();
+      document.getElementById("count").textContent = list.length + (list.length === 1 ? " car" : " cars") + " match";
+      var results = document.getElementById("results");
+      if (!list.length) {
+        results.innerHTML = '<div class="empty">No cars match these filters. Raise the max price or mileage, or <button type="button" class="btn btn-line" id="empty-reset">clear filters</button>.</div>';
+        document.getElementById("empty-reset").addEventListener("click", function () { document.getElementById("f-reset").click(); });
+      } else {
+        results.innerHTML = list.map(function (c) { return F.stickerHtml(c, { compare: true }); }).join("");
+        results.querySelectorAll("[data-compare]").forEach(function (box) {
+          box.checked = state.compare.indexOf(box.dataset.compare) >= 0;
+          box.addEventListener("change", function () { toggleCompare(box); });
+        });
+      }
+      renderTray();
+    }
+
+    function toggleCompare(box) {
+      var id = box.dataset.compare, i = state.compare.indexOf(id);
+      if (box.checked && i < 0) {
+        if (state.compare.length >= 3) { box.checked = false; flashTray("You can compare up to 3 cars. Untick one first."); return; }
+        state.compare.push(id);
+      } else if (!box.checked && i >= 0) { state.compare.splice(i, 1); }
+      renderTray();
+    }
+
+    var trayMsg = "";
+    function flashTray(msg) { trayMsg = msg; renderTray(); setTimeout(function () { trayMsg = ""; renderTray(); }, 2600); }
+    function renderTray() {
+      var tray = document.getElementById("tray");
+      tray.hidden = state.compare.length === 0 && !trayMsg;
+      document.getElementById("tray-text").textContent = trayMsg ||
+        (state.compare.length + " of 3 selected" + (state.compare.length < 2 ? ". Pick at least 2 to compare." : "."));
+      document.getElementById("tray-go").disabled = state.compare.length < 2;
+    }
+    document.getElementById("tray-clear").addEventListener("click", function () {
+      state.compare = []; document.getElementById("compare").hidden = true; render();
+    });
+    document.getElementById("tray-go").addEventListener("click", function () {
+      renderCompare();
+      var box = document.getElementById("compare");
+      box.hidden = false;
+      box.scrollIntoView({ block: "start" });
+    });
+
+    function renderCompare() {
+      var cars = state.compare.map(F.getCar);
+      F.track("compare", { cars: state.compare.join(",") });
+      function bestIdx(vals, lowIsBest) {
+        var best = lowIsBest ? Math.min.apply(null, vals) : Math.max.apply(null, vals);
+        var hits = vals.filter(function (v) { return v === best; }).length;
+        return hits === vals.length ? -1 : vals.indexOf(best);
+      }
+      var rows = [
+        ["Price", cars.map(function (c) { return c.price; }), function (v) { return F.money(v); }, true],
+        ["Est. monthly", cars.map(function (c) { return F.defaultEstimate(c.price); }), function (v) { return F.money(v); }, true],
+        ["Year", cars.map(function (c) { return c.year; }), String, false],
+        ["Mileage", cars.map(function (c) { return c.miles; }), F.miles, true],
+        ["Owners", cars.map(function (c) { return c.owners; }), String, true],
+        ["Accidents reported", cars.map(function (c) { return c.accidents; }), String, true],
+        ["Body", cars.map(function (c) { return c.body; }), String, null],
+        ["Drive", cars.map(function (c) { return c.drive; }), String, null],
+        ["Fuel", cars.map(function (c) { return c.fuel; }), String, null],
+        ["Service records", cars.map(function (c) { return c.records ? "Yes" : "No"; }), String, null]
+      ];
+      var html = "<thead><tr><th scope=\"col\">Car</th>" + cars.map(function (c) {
+        return "<th scope=\"col\">" + F.esc(F.carName(c)) + "<br><small style=\"font-weight:400;color:var(--peri)\">" + F.esc(c.trim) + "</small></th>";
+      }).join("") + "</tr></thead><tbody>";
+      rows.forEach(function (r) {
+        var b = r[3] === null ? -1 : bestIdx(r[1], r[3]);
+        html += "<tr><th scope=\"row\">" + r[0] + "</th>" + r[1].map(function (v, i) {
+          return "<td" + (i === b ? " class=\"best\"" : "") + ">" + F.esc(r[2](v)) + "</td>";
+        }).join("") + "</tr>";
+      });
+      html += "<tr><th scope=\"row\">Next step</th>" + cars.map(function (c) {
+        return "<td><a class=\"btn btn-violet\" style=\"padding:9px 14px;font-size:.9rem\" href=\"car.html#" + c.id + "\" data-track=\"compare_view_" + c.id + "\">View car</a></td>";
+      }).join("") + "</tr></tbody>";
+      document.getElementById("compare-table").innerHTML = html;
+    }
+
+    render();
+  })();
+  </script>
+</body>
+</html>
